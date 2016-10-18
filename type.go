@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"go/ast"
+	"os"
 	"strings"
 )
 
@@ -24,6 +25,8 @@ func createType(typ ast.Expr, pkg *Package) Type {
 		strings.ToLower(t.String()) != t.String() { // exported.
 		t.isBasePackage = true
 	}
+
+	fmt.Fprintln(os.Stderr, "##########", t.typ, t.pkg, t.isBasePackage, t.String())
 
 	return t
 }

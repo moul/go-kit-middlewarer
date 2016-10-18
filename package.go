@@ -6,6 +6,7 @@ import (
 	"go/importer"
 	"go/token"
 	"go/types"
+        "os"
 )
 
 type Package struct {
@@ -31,6 +32,10 @@ func (pkg *Package) check(fs *token.FileSet, astFiles []*ast.File) {
 		Defs: pkg.defs,
 	}
 	typesPkg, err := config.Check(pkg.dir, fs, astFiles, info)
+        fmt.Fprintln(os.Stderr, "AAAAAAAAAAAAAAAA", pkg.dir, fs, astFiles, info)
+        for _, fil := range astFiles {
+            fmt.Fprintln(os.Stderr, "BBBB", fil.Imports[0].Path)
+        }
 	if err != nil {
 		log.Fatalf("checking package: %s", err)
 	}

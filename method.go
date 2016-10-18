@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"go/ast"
+	"os"
 	"strings"
 )
 
@@ -155,6 +156,10 @@ func (m Method) methodResults() string {
 		result = append(result, p.ParamSpec())
 	}
 
+	fmt.Fprintln(os.Stderr, "@@@@@", m.results, strings.Join(result, ", "))
+	for _, p := range m.results {
+		fmt.Fprintln(os.Stderr, "    ", p.typ, p.names)
+	}
 	return strings.Join(result, ", ")
 }
 
