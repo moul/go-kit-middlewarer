@@ -9,6 +9,7 @@ type TemplateCommon struct {
 	BasePackage         string
 	BasePackageImport   string
 	BasePackageName     string
+	BasePackageNameCap  string
 	EndpointPackage     string
 	EndpointPackageName string
 	EndpointPrefix      string
@@ -127,6 +128,7 @@ func createTemplateMethods(basePackage, endpointPackage *Import, interf Interfac
 				BasePackage:         basePackage.path,
 				BasePackageImport:   basePackage.ImportSpec(),
 				BasePackageName:     basePackage.name,
+				BasePackageNameCap:  strings.Title(basePackage.name),
 				EndpointPackage:     endpointPackage.path,
 				EndpointPackageName: endpointPackage.name,
 				EndpointPrefix:      fmt.Sprintf("/%s", strings.ToLower(interf.name)),
@@ -211,6 +213,7 @@ func createTemplateBase(basePackage, endpointPackage *Import, i Interface, oimps
 			BasePackage:         basePackage.path,
 			BasePackageImport:   basePackage.ImportSpec(),
 			BasePackageName:     basePackage.name,
+			BasePackageNameCap:  strings.Title(basePackage.name),
 			EndpointPackage:     endpointPackage.path,
 			EndpointPackageName: endpointPackage.name,
 			EndpointPrefix:      fmt.Sprintf("/%s", strings.ToLower(i.name)),

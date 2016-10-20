@@ -71,6 +71,27 @@ func processHTTPServer(gopath string, tb TemplateBase) {
 	fmt.Fprint(file, string(formatBuffer(buf, filename)))
 }
 
+func processGRPCServer(gopath string, tb TemplateBase) {
+	var buf bytes.Buffer
+
+	tmpl, err := template.ParseFiles(filepath.Join(gopath, "src", "github.com", "ayiga", "go-kit-middlewarer", "tmpl", "transport-grpc-server.tmpl"))
+	if err != nil {
+		log.Fatalf("Template Parse Error: %s", err)
+	}
+
+	err = tmpl.Execute(&buf, tb)
+	if err != nil {
+		log.Fatalf("Template execution failed: %s\n", err)
+	}
+
+	filename := "grpc-server_gen.go"
+
+	file := openFile(filepath.Join(".", "transport", "grpc"), filename)
+	defer file.Close()
+
+	fmt.Fprint(file, string(formatBuffer(buf, filename)))
+}
+
 func processTransportClient(gopath string, tb TemplateBase) {
 	var buf bytes.Buffer
 
@@ -147,6 +168,7 @@ func processTransport(g *Generator, f *File) {
 		processRequestResponse(gopath, tb)
 		processMakeEndpoint(gopath, tb)
 		processHTTPServer(gopath, tb)
+		processGRPCServer(gopath, tb)
 		processTransportClient(gopath, tb)
 		processHTTPInstanceClient(gopath, tb)
 		processHTTPLoadBalancedClient(gopath, tb)
