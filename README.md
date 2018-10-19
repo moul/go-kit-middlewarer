@@ -1,4 +1,7 @@
 # go-kit-middlewarer#
+
+[![GuardRails badge](https://badges.production.guardrails.io/moul/go-kit-middlewarer.svg)](https://www.guardrails.io)
+
 go-kit-middlewarer is a utility project meant to be used to quickly generate
 various layers of the go-kit microservice framework.
 
